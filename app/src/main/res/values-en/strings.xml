@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Grocery App</string>
+    <string name="menu_clientes">Customers</string>
+    <string name="menu_productos">Products</string>
+    <string name="menu_categorias">Categories</string>
+    <string name="menu_usuarios">Users</string>
+    <string name="menu_facturacion">Billing (Master–Detail)</string>
+    <string name="menu_salir">Exit</string>
+</resources>

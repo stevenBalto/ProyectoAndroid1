@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Verdulería App</string>
+    <string name="menu_clientes">Clientes</string>
+    <string name="menu_productos">Productos</string>
+    <string name="menu_categorias">Categorías</string>
+    <string name="menu_usuarios">Usuarios</string>
+    <string name="menu_facturacion">Facturación (Maestro–Detalle)</string>
+    <string name="menu_salir">Salir</string>
+</resources>
