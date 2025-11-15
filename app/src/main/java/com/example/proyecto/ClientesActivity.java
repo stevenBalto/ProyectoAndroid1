@@ -2,16 +2,12 @@ package com.example.proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ClientesActivity extends AppCompatActivity {
 
@@ -32,11 +27,10 @@ public class ClientesActivity extends AppCompatActivity {
     Button btnGuardar, btnCancelar;
 
     ArrayList<Cliente> listaClientes = new ArrayList<>();
-    ClienteAdapter adapter;
+    ArrayAdapter<String> adapter;
 
     DatabaseHelper db;
     String cedulaSeleccionada = null;
-    View vistaSeleccionada = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +70,6 @@ public class ClientesActivity extends AppCompatActivity {
         });
 
         listViewClientes.setOnItemClickListener((parent, view, position, id) -> {
-            if (vistaSeleccionada != null) {
-                vistaSeleccionada.setBackgroundColor(Color.TRANSPARENT);
-            }
-            view.setBackgroundColor(Color.LTGRAY);
-            vistaSeleccionada = view;
-
             Cliente c = listaClientes.get(position);
             cedulaSeleccionada = c.getCedula();
             actualizarEstadoBotones(true);
@@ -105,7 +93,6 @@ public class ClientesActivity extends AppCompatActivity {
             }
         });
 
-        // --- Comportamiento inteligente del botón Salir ---
         btnSalir.setOnClickListener(v -> {
             if (layoutFormulario.getVisibility() == View.VISIBLE) {
                 mostrarLista();
@@ -118,7 +105,6 @@ public class ClientesActivity extends AppCompatActivity {
         btnCancelar.setOnClickListener(v -> mostrarLista());
     }
 
-    // --- Comportamiento inteligente del botón Atrás físico ---
     @Override
     public void onBackPressed() {
         if (layoutFormulario.getVisibility() == View.VISIBLE) {
@@ -186,6 +172,8 @@ public class ClientesActivity extends AppCompatActivity {
 
     private void cargarClientes(String query) {
         listaClientes.clear();
+        ArrayList<String> textos = new ArrayList<>();
+
         SQLiteDatabase readable = db.getReadableDatabase();
         Cursor c;
 
@@ -196,21 +184,15 @@ public class ClientesActivity extends AppCompatActivity {
         }
 
         while (c.moveToNext()) {
-            listaClientes.add(new Cliente(c.getString(0), c.getString(1), c.getString(2)));
+            Cliente cli = new Cliente(c.getString(0), c.getString(1), c.getString(2));
+            listaClientes.add(cli);
+            textos.add(cli.getNombre() + " - " + cli.getCedula());
         }
         c.close();
 
-        if (adapter == null) {
-            adapter = new ClienteAdapter(this, listaClientes);
-            listViewClientes.setAdapter(adapter);
-        } else {
-            adapter.notifyDataSetChanged();
-        }
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, textos);
+        listViewClientes.setAdapter(adapter);
 
-        if (vistaSeleccionada != null) {
-            vistaSeleccionada.setBackgroundColor(Color.TRANSPARENT);
-            vistaSeleccionada = null;
-        }
         cedulaSeleccionada = null;
         actualizarEstadoBotones(false);
     }
@@ -222,7 +204,6 @@ public class ClientesActivity extends AppCompatActivity {
         return null;
     }
 
-    // --- Clase de Modelo para Cliente ---
     public class Cliente {
         private String cedula, nombre, telefono;
 
@@ -235,35 +216,5 @@ public class ClientesActivity extends AppCompatActivity {
         public String getCedula() { return cedula; }
         public String getNombre() { return nombre; }
         public String getTelefono() { return telefono; }
-    }
-
-    // --- Adaptador Personalizado ---
-    public class ClienteAdapter extends ArrayAdapter<Cliente> {
-        public ClienteAdapter(Context context, List<Cliente> clientes) {
-            super(context, 0, clientes);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_cliente, parent, false);
-            }
-
-            Cliente cliente = getItem(position);
-
-            TextView txtNombre = convertView.findViewById(R.id.txtNombreCliente);
-            TextView txtCedula = convertView.findViewById(R.id.txtCedulaCliente);
-
-            txtNombre.setText(cliente.getNombre());
-            txtCedula.setText(cliente.getCedula());
-
-            if (vistaSeleccionada != null && cedulaSeleccionada != null && cedulaSeleccionada.equals(cliente.getCedula())) {
-                convertView.setBackgroundColor(Color.LTGRAY);
-            } else {
-                convertView.setBackgroundColor(Color.TRANSPARENT);
-            }
-
-            return convertView;
-        }
     }
 }
