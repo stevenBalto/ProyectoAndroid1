@@ -1,10 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FacturaActivity">
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ==========================
+         LISTA + BOTONES
+    ============================ -->
+    <LinearLayout
+        android:id="@+id/layoutLista"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Detalle de Factura"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <ListView
+            android:id="@+id/listViewDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:divider="#CCC"
+            android:dividerHeight="1dp"/>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btnEditar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Editar"
+                android:drawableTop="@android:drawable/ic_menu_edit"
+                android:padding="12dp"
+                android:drawablePadding="6dp"/>
+
+            <TextView
+                android:id="@+id/btnEliminar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Eliminar"
+                android:drawableTop="@android:drawable/ic_menu_delete"
+                android:padding="12dp"
+                android:drawablePadding="6dp"/>
+
+            <TextView
+                android:id="@+id/btnSalir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Salir"
+                android:drawableTop="@android:drawable/ic_menu_revert"
+                android:padding="12dp"
+                android:drawablePadding="6dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ==========================
+         FORMULARIO DE EDICIÓN
+    ============================ -->
+    <ScrollView
+        android:id="@+id/layoutFormulario"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Editar Factura"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- NÚMERO FACTURA -->
+            <TextView android:text="Número de Factura:"/>
+            <EditText
+                android:id="@+id/txtNumeroFactura"
+                android:enabled="false"
+                android:background="@android:drawable/editbox_background"
+                android:padding="8dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- FECHA -->
+            <TextView android:text="Fecha:"/>
+            <TextView
+                android:id="@+id/txtFecha"
+                android:background="@android:drawable/editbox_background"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- CLIENTE -->
+            <TextView android:text="Cliente:"/>
+            <Spinner
+                android:id="@+id/spinnerClientes"
+                android:background="@android:drawable/editbox_background"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- PRODUCTO -->
+            <TextView android:text="Producto:"/>
+            <Spinner
+                android:id="@+id/spinnerProductos"
+                android:background="@android:drawable/editbox_background"
+                android:padding="8dp"/>
+
+            <TextView
+                android:id="@+id/txtNombreProducto"
+                android:textStyle="italic"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/txtPrecioProducto"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- CANTIDAD -->
+            <EditText
+                android:id="@+id/txtCantidad"
+                android:hint="Cantidad"
+                android:inputType="number"
+                android:background="@android:drawable/editbox_background"
+                android:padding="8dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- BOTONES DEL FORMULARIO -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    android:text="Guardar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:text="Cancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
