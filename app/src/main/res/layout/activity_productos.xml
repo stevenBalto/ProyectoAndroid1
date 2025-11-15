@@ -29,7 +29,6 @@
             android:hint="Buscar producto..."
             android:drawableStart="@android:drawable/ic_menu_search"
             android:drawablePadding="12dp"
-            android:background="@drawable/edit_text_background"
             android:padding="12dp"
             android:layout_marginBottom="16dp" />
 
@@ -121,34 +120,40 @@
                 android:layout_marginBottom="24dp" />
 
             <!-- CÓDIGO -->
-            <TextView android:text="Código" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código" />
             <EditText
                 android:id="@+id/txtCodigo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/edit_text_background"
                 android:padding="12dp" />
 
             <!-- NOMBRE -->
-            <TextView android:text="Nombre" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre" />
             <EditText
                 android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/edit_text_background"
                 android:padding="12dp" />
 
             <!-- PRECIO -->
-            <TextView android:text="Precio" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio" />
             <EditText
                 android:id="@+id/txtPrecio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/edit_text_background"
                 android:padding="12dp" />
 
             <Button
