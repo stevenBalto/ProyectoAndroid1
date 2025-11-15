@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
     public class DatabaseHelper extends SQLiteOpenHelper {
 
         public static final String DB_NAME = "verduleria.db";
-        public static final int DB_VERSION = 1;
+        public static final int DB_VERSION = 3; // <-- VERSIÓN FORZADA A 3
 
         public DatabaseHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
@@ -66,8 +66,8 @@ import android.database.sqlite.SQLiteOpenHelper;
                     "('12345678', 'Juan Pérez', '555-1234')," +
                     "('504570475', 'Luis', '85198095')," +
                     "('87654321', 'María González', '555-5678')");
-            db.execSQL("INSERT INTO productos (codigo, nombre, id_categoria, precio) VALUES " +
-                    "('1', 'Fresa', 11, 1000)");
+            // --- INSERT CORREGIDO --- 
+            db.execSQL("INSERT INTO productos (codigo, nombre, precio) VALUES ('1', 'Fresa', 1000)");
             db.execSQL("INSERT INTO usuarios (cedula, nombre, llave) VALUES ('1', 'admin', '123456')");
         }
 

@@ -149,7 +149,8 @@ public class ProductosActivity extends AppCompatActivity {
         } else {
             txtCodigo.setText(p.getCodigo());
             txtNombre.setText(p.getNombre());
-            txtPrecio.setText(String.valueOf(p.getPrecio()));
+            // --- AJUSTE: Mostrar precio como entero ---
+            txtPrecio.setText(String.valueOf((int) p.getPrecio()));
             txtCodigo.setEnabled(false);  // edición (UPDATE)
         }
     }
@@ -273,7 +274,8 @@ public class ProductosActivity extends AppCompatActivity {
             TextView txt2 = convertView.findViewById(android.R.id.text2);
 
             txt1.setText(p.getNombre());
-            txt2.setText("Código: " + p.getCodigo());
+            // --- AJUSTE: Mostrar Código y Precio (como entero) ---
+            txt2.setText("Código: " + p.getCodigo() + "  |  Precio: ₡" + (int)p.getPrecio());
 
             if (vistaSeleccionada != null &&
                     codigoSeleccionado != null &&
