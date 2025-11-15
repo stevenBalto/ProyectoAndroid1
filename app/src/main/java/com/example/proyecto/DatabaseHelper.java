@@ -31,9 +31,8 @@ import android.database.sqlite.SQLiteOpenHelper;
             db.execSQL("CREATE TABLE productos (" +
                     "codigo TEXT PRIMARY KEY," +
                     "nombre TEXT NOT NULL," +
-                    "id_categoria INTEGER," +
-                    "precio REAL NOT NULL," +
-                    "FOREIGN KEY(id_categoria) REFERENCES categorias(id))");
+                    "precio REAL NOT NULL)");
+
 
             // ========== TABLA ENCABEZADO FACTURA ==========
             db.execSQL("CREATE TABLE encabezado_factura (" +
