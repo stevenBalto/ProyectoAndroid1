@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="#F0F4F8"
     tools:context=".MainActivity">
 
     <TextView
@@ -14,15 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="#333333"
         android:gravity="center"
-        android:padding="16dp" />
+        android:padding="24dp" />
 
-    <ListView
-        android:id="@+id/listViewMenu"
+    <LinearLayout
+        android:id="@+id/menuContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:orientation="vertical" />
 
 </LinearLayout>

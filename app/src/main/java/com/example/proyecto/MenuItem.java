@@ -1,13 +1,14 @@
 package com.example.proyecto;
 
-// Modelo para cada ítem del menú
 public class MenuItem {
-    private int icon; // Recurso drawable del ícono
-    private String title; // Título del ítem
+    private int icon;
+    private String title;
+    private int color;
 
-    public MenuItem(int icon, String title) {
+    public MenuItem(int icon, String title, int color) {
         this.icon = icon;
         this.title = title;
+        this.color = color;
     }
 
     public int getIcon() {
@@ -16,5 +17,9 @@ public class MenuItem {
 
     public String getTitle() {
         return title;
+    }
+
+    public int getColor() {
+        return color;
     }
 }
