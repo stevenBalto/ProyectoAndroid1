@@ -196,6 +196,7 @@ public class FacturaActivity extends AppCompatActivity {
             return;
         }
 
+        boolean success = false;
         db.beginTransaction();
         try {
             int total = 0;
@@ -222,16 +223,20 @@ public class FacturaActivity extends AppCompatActivity {
                 detail.put("precio_producto", d.precio);
                 detail.put("cantidad_producto", d.cantidad);
                 detail.put("subtotal", d.subtotal);
-                db.insert("detalle_factura", null, detail);
+                db.insertOrThrow("detalle_factura", null, detail);
             }
             
             db.setTransactionSuccessful();
-            Toast.makeText(this, "Factura guardada.", Toast.LENGTH_SHORT).show();
-            mostrarLista();
+            success = true;
         } catch (Exception e) {
             Toast.makeText(this, "Error al guardar.", Toast.LENGTH_LONG).show();
         } finally {
             db.endTransaction();
+        }
+
+        if (success) {
+            Toast.makeText(this, "Factura guardada.", Toast.LENGTH_SHORT).show();
+            mostrarLista();
         }
     }
     
