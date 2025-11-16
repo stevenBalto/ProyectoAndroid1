@@ -171,11 +171,13 @@ public class FacturaActivity extends AppCompatActivity {
 
         if (factura == null) { // Nueva
             lblTituloFormulario.setText("Nueva Factura");
+            btnAgregarProductoAlDetalle.setText("Añadir Producto a la Factura");
             txtFecha.setText("");
             if(spinnerClientes.getAdapter() != null && spinnerClientes.getCount() > 0) spinnerClientes.setSelection(0);
             cargarSiguienteNumeroFactura();
         } else { // Editar
             lblTituloFormulario.setText("Editar Factura #" + factura.id);
+            btnAgregarProductoAlDetalle.setText("Editar productos de la factura");
             txtNumeroFactura.setText(String.valueOf(factura.id));
             txtFecha.setText(factura.fecha);
             for (int i = 0; i < spinnerClientes.getAdapter().getCount(); i++) {
@@ -252,7 +254,11 @@ public class FacturaActivity extends AppCompatActivity {
                 boolean existe = false;
                 for(Detalle d : listaDetalleTemporal) {
                     if(d.codigo.equals(codigo)) {
-                        d.cantidad += cantidad;
+                        if (facturaSeleccionadaIndex != -1) { // Modo Editar: Reemplazar cantidad
+                            d.cantidad = cantidad;
+                        } else { // Modo Nuevo: Sumar cantidad
+                            d.cantidad += cantidad;
+                        }
                         d.subtotal = d.cantidad * d.precio;
                         existe = true;
                         break;
