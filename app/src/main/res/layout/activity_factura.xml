@@ -150,9 +150,8 @@
             android:id="@+id/btnCancelar"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_height="wrap_content"
-            android:text="Cancelar"/>
+            android:text="Salir"/>
     </LinearLayout>
 
     <!-- Barra de Navegación Principal -->
