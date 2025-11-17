@@ -1,6 +1,7 @@
 package com.example.proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -137,15 +138,17 @@ public class FacturaActivity extends AppCompatActivity {
                 .show();
             return true;
         });
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (layoutFormulario.getVisibility() == View.VISIBLE) {
-            mostrarLista();
-        } else {
-            super.onBackPressed();
-        }
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (layoutFormulario.getVisibility() == View.VISIBLE) {
+                    mostrarLista();
+                } else {
+                    finish();
+                }
+            }
+        });
     }
 
     // ================== VISTAS ==================
@@ -325,9 +328,17 @@ public class FacturaActivity extends AppCompatActivity {
     // ================== HELPERS ==================
     private void cargarFacturasDeDB() {
         listaFacturas.clear();
-        Cursor c = db.rawQuery("SELECT e.id, e.fecha, e.total, c.nombre FROM encabezado_factura e " +
-                "JOIN cliente c ON e.cedula_cliente = c.cedula ORDER BY e.id DESC", null);
-        while(c.moveToNext()) listaFacturas.add(new Factura(c.getInt(0), c.getString(1), c.getString(3), c.getInt(2)));
+        String query = "SELECT e.id, e.fecha, e.total, c.nombre, " +
+                "(SELECT GROUP_CONCAT(p.nombre, ', ') FROM detalle_factura d JOIN productos p ON d.codigo_producto = p.codigo WHERE d.id_factura = e.id) as productos " +
+                "FROM encabezado_factura e JOIN cliente c ON e.cedula_cliente = c.cedula ORDER BY e.id ASC";
+        Cursor c = db.rawQuery(query, null);
+        while(c.moveToNext()) {
+            String productos = c.getString(4);
+            if (productos == null || productos.isEmpty()) {
+                productos = "Sin productos";
+            }
+            listaFacturas.add(new Factura(c.getInt(0), c.getString(1), c.getString(3), c.getInt(2), productos));
+        }
         c.close();
         facturaAdapter.notifyDataSetChanged();
     }
@@ -381,8 +392,8 @@ public class FacturaActivity extends AppCompatActivity {
     
     // ================== CLASES INTERNAS ==================
     public static class Factura {
-        int id, total; String fecha, cliente;
-        public Factura(int id, String f, String c, int t) { this.id=id; this.fecha=f; this.cliente=c; this.total=t; }
+        int id, total; String fecha, cliente, productos;
+        public Factura(int id, String f, String c, int t, String p) { this.id=id; this.fecha=f; this.cliente=c; this.total=t; this.productos=p; }
     }
 
     private class FacturaAdapter extends BaseAdapter {
@@ -394,7 +405,7 @@ public class FacturaActivity extends AppCompatActivity {
             TextView t1 = cv.findViewById(android.R.id.text1), t2 = cv.findViewById(android.R.id.text2);
             Factura f = listaFacturas.get(pos);
             t1.setText("Factura #" + f.id + " - " + f.cliente);
-            t2.setText(String.format(Locale.getDefault(), "Fecha: %s | Total: ₡%d", f.fecha, f.total));
+            t2.setText(String.format(Locale.getDefault(), "Fecha: %s | %s | Total: ₡%d", f.fecha, f.productos, f.total));
             cv.setBackgroundColor(facturaSeleccionadaIndex == pos ? Color.LTGRAY : Color.TRANSPARENT);
             return cv;
         }

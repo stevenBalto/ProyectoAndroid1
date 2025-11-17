@@ -200,13 +200,14 @@ public class ProductosActivity extends AppCompatActivity {
 
         if (query.trim().isEmpty()) {
             c = readable.rawQuery(
-                    "SELECT codigo, nombre, precio FROM productos ORDER BY nombre",
+                    "SELECT codigo, nombre, precio FROM productos ORDER BY CAST(codigo AS INTEGER)",
                     null
             );
         } else {
+            String likeQuery = "%" + query + "%";
             c = readable.rawQuery(
-                    "SELECT codigo, nombre, precio FROM productos WHERE nombre LIKE ? ORDER BY nombre",
-                    new String[]{"%" + query + "%"}
+                    "SELECT codigo, nombre, precio FROM productos WHERE nombre LIKE ? OR codigo LIKE ? ORDER BY CAST(codigo AS INTEGER)",
+                    new String[]{likeQuery, likeQuery}
             );
         }
 
