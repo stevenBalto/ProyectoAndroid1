@@ -186,7 +186,8 @@ public class ClientesActivity extends AppCompatActivity {
         if (query.trim().isEmpty()) {
             c = readable.rawQuery("SELECT cedula, nombre, telefono FROM cliente ORDER BY nombre", null);
         } else {
-            c = readable.rawQuery("SELECT cedula, nombre, telefono FROM cliente WHERE nombre LIKE ? ORDER BY nombre", new String[]{"%" + query + "%"});
+            String likeQuery = "%" + query + "%";
+            c = readable.rawQuery("SELECT cedula, nombre, telefono FROM cliente WHERE nombre LIKE ? OR cedula LIKE ? ORDER BY nombre", new String[]{likeQuery, likeQuery});
         }
 
         while (c.moveToNext()) {
