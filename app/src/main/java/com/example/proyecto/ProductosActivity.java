@@ -1,6 +1,7 @@
 package com.example.proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -119,15 +120,18 @@ public class ProductosActivity extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(v -> guardarProducto());
         btnCancelar.setOnClickListener(v -> mostrarLista());
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (layoutFormulario.getVisibility() == View.VISIBLE) {
-            mostrarLista();
-        } else {
-            super.onBackPressed();
-        }
+        
+        // Handle back press using the new OnBackPressedDispatcher
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (layoutFormulario.getVisibility() == View.VISIBLE) {
+                    mostrarLista();
+                } else {
+                    finish(); // Finish the activity
+                }
+            }
+        });
     }
 
     private void actualizarEstadoBotones(boolean habilitados) {

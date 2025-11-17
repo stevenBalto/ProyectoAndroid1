@@ -1,13 +1,17 @@
 package com.example.proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +31,7 @@ public class ClientesActivity extends AppCompatActivity {
     Button btnGuardar, btnCancelar;
 
     ArrayList<Cliente> listaClientes = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ClienteAdapter adapter;
 
     DatabaseHelper db;
     String cedulaSeleccionada = null;
@@ -103,15 +107,18 @@ public class ClientesActivity extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(v -> guardarCliente());
         btnCancelar.setOnClickListener(v -> mostrarLista());
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (layoutFormulario.getVisibility() == View.VISIBLE) {
-            mostrarLista();
-        } else {
-            super.onBackPressed();
-        }
+        // Handle back press using the new OnBackPressedDispatcher
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (layoutFormulario.getVisibility() == View.VISIBLE) {
+                    mostrarLista();
+                } else {
+                    finish(); // Finish the activity
+                }
+            }
+        });
     }
 
     private void actualizarEstadoBotones(boolean habilitados) {
@@ -172,7 +179,6 @@ public class ClientesActivity extends AppCompatActivity {
 
     private void cargarClientes(String query) {
         listaClientes.clear();
-        ArrayList<String> textos = new ArrayList<>();
 
         SQLiteDatabase readable = db.getReadableDatabase();
         Cursor c;
@@ -186,11 +192,10 @@ public class ClientesActivity extends AppCompatActivity {
         while (c.moveToNext()) {
             Cliente cli = new Cliente(c.getString(0), c.getString(1), c.getString(2));
             listaClientes.add(cli);
-            textos.add(cli.getNombre() + " - " + cli.getCedula());
         }
         c.close();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, textos);
+        adapter = new ClienteAdapter(this, listaClientes);
         listViewClientes.setAdapter(adapter);
 
         cedulaSeleccionada = null;
@@ -202,6 +207,30 @@ public class ClientesActivity extends AppCompatActivity {
             if (c.getCedula().equals(cedula)) return c;
         }
         return null;
+    }
+
+    // --- ADAPTADOR PERSONALIZADO ---
+    public class ClienteAdapter extends ArrayAdapter<Cliente> {
+        public ClienteAdapter(Context context, ArrayList<Cliente> clientes) {
+            super(context, 0, clientes);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
+            }
+
+            Cliente cliente = getItem(position);
+
+            TextView text1 = convertView.findViewById(android.R.id.text1);
+            TextView text2 = convertView.findViewById(android.R.id.text2);
+
+            text1.setText(cliente.getNombre());
+            text2.setText("Cédula: " + cliente.getCedula() + " | Tel: " + cliente.getTelefono());
+
+            return convertView;
+        }
     }
 
     public class Cliente {
