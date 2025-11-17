@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- VISTA PRINCIPAL: LISTA DE FACTURAS -->
+
     <LinearLayout
         android:id="@+id/layoutLista"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
 
     </LinearLayout>
 
-    <!-- FORMULARIO PARA CREAR/EDITAR FACTURA (Oculto por defecto) -->
+
     <ScrollView
         android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Encabezado de la Factura -->
+
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/factura_number_label"/>
             <EditText
                 android:id="@+id/txtNumeroFactura"
@@ -129,7 +129,7 @@
         </LinearLayout>
     </ScrollView>
     
-    <!-- Barra de Navegación del Formulario -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation_factura_form"
         android:layout_width="match_parent"
@@ -154,7 +154,7 @@
             android:text="@string/factura_cancel"/>
     </LinearLayout>
 
-    <!-- Barra de Navegación Principal -->
+ 
     <LinearLayout
         android:id="@+id/bottom_navigation_factura"
         android:layout_width="match_parent"
