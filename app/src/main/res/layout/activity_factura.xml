@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- VISTA PRINCIPAL: LISTA DE FACTURAS -->
+
     <LinearLayout
         android:id="@+id/layoutLista"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Facturas Guardadas"
+            android:text="@string/factura_title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="12dp"/>
@@ -31,7 +31,7 @@
 
     </LinearLayout>
 
-    <!-- FORMULARIO PARA CREAR/EDITAR FACTURA (Oculto por defecto) -->
+
     <ScrollView
         android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
@@ -50,13 +50,13 @@
                 android:id="@+id/lblTituloFormulario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nueva Factura"
+                android:text="@string/factura_form_title"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Encabezado de la Factura -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Número de Factura:"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/factura_number_label"/>
             <EditText
                 android:id="@+id/txtNumeroFactura"
                 android:enabled="false"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fecha:"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/factura_date_label"/>
             <TextView
                 android:id="@+id/txtFecha"
                 android:layout_width="match_parent"
@@ -76,18 +76,18 @@
                 android:background="@android:drawable/editbox_background"
                 android:layout_marginBottom="12dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cliente:"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/factura_customer_label"/>
             <Spinner
                 android:id="@+id/spinnerClientes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"/>
 
-            <!-- Sección para Agregar Productos -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agregar Producto"
+                android:text="@string/factura_add_product_title"
                 android:textSize="20sp"
                 android:textStyle="bold" />
                 
@@ -99,7 +99,7 @@
 
             <EditText
                 android:id="@+id/txtCantidadForm"
-                android:hint="Cantidad"
+                android:hint="@string/factura_quantity_hint"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:id="@+id/btnAgregarProductoAlDetalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Añadir Producto a la Factura"
+                android:text="@string/factura_add_product_button"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"/>
 
@@ -117,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detalle Actual"
+                android:text="@string/factura_detail_title"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
@@ -128,8 +128,7 @@
 
         </LinearLayout>
     </ScrollView>
-    
-    <!-- Barra de Navegación del Formulario -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation_factura_form"
         android:layout_width="match_parent"
@@ -145,16 +144,16 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Guardar"/>
+            android:text="@string/factura_save"/>
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Salir"/>
+            android:text="@string/factura_cancel"/>
     </LinearLayout>
 
-    <!-- Barra de Navegación Principal -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation_factura"
         android:layout_width="match_parent"
@@ -170,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Agregar"
+            android:text="@string/factura_add"
             android:drawableTop="@android:drawable/ic_menu_add"
             android:padding="12dp"/>
 
@@ -180,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Editar"
+            android:text="@string/factura_edit"
             android:drawableTop="@android:drawable/ic_menu_edit"
             android:padding="12dp"/>
 
@@ -190,7 +189,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Eliminar"
+            android:text="@string/factura_delete"
             android:drawableTop="@android:drawable/ic_menu_delete"
             android:padding="12dp"/>
 
@@ -200,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Salir"
+            android:text="@string/factura_exit"
             android:drawableTop="@android:drawable/ic_menu_revert"
             android:padding="12dp"/>
     </LinearLayout>

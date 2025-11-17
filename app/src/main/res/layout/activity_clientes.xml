@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- SECCION 1: LISTA DE CLIENTES -->
+
     <LinearLayout
         android:id="@+id/layoutLista"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clientes"
+            android:text="@string/clientes_title"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -26,7 +26,7 @@
             android:id="@+id/txtBuscar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Buscar cliente..."
+            android:hint="@string/clientes_search_hint"
             android:drawableStart="@android:drawable/ic_menu_search"
             android:drawablePadding="12dp"
             android:background="@drawable/edit_text_background"
@@ -42,7 +42,7 @@
             android:dividerHeight="8dp"/>
     </LinearLayout>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Agregar"
+            android:text="@string/clientes_add"
             android:gravity="center"
             android:padding="12dp"
             android:drawableTop="@android:drawable/ic_menu_add"
@@ -67,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Editar"
+            android:text="@string/clientes_edit"
             android:gravity="center"
             android:padding="12dp"
             android:drawableTop="@android:drawable/ic_menu_edit"
@@ -77,7 +77,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Eliminar"
+            android:text="@string/clientes_delete"
             android:gravity="center"
             android:padding="12dp"
             android:drawableTop="@android:drawable/ic_menu_delete"
@@ -87,14 +87,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Salir"
+            android:text="@string/clientes_exit"
             android:gravity="center"
             android:padding="12dp"
             android:drawableTop="@android:drawable/ic_menu_revert"
             android:background="?attr/selectableItemBackground"/>
     </LinearLayout>
 
-    <!-- SECCION 2: FORMULARIO -->
     <ScrollView
         android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
@@ -111,13 +110,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Datos del Cliente"
+                android:text="@string/clientes_form_title"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cédula"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clientes_id"/>
             <EditText
                 android:id="@+id/txtCedula"
                 android:layout_width="match_parent"
@@ -126,7 +125,7 @@
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clientes_name"/>
             <EditText
                 android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
@@ -135,7 +134,7 @@
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"/>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Teléfono"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clientes_phone"/>
             <EditText
                 android:id="@+id/txtTelefono"
                 android:layout_width="match_parent"
@@ -148,7 +147,7 @@
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Guardar"
+                android:text="@string/clientes_save"
                 android:padding="14dp"
                 android:layout_marginBottom="8dp"/>
 
@@ -157,7 +156,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cancelar" />
+                android:text="@string/clientes_cancel" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
