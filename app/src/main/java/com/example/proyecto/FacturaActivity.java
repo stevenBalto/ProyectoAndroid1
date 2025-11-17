@@ -30,32 +30,23 @@ import java.util.Locale;
 
 public class FacturaActivity extends AppCompatActivity {
 
-    // Vistas
     LinearLayout layoutLista, bottomNavLista;
     ScrollView layoutFormulario;
     LinearLayout bottomNavForm;
     ListView listViewFacturas;
     TextView lblTituloFormulario;
-
-    // Botones
     TextView btnAgregar, btnEditar, btnEliminar, btnSalir;
     Button btnGuardarFactura, btnCancelar;
     Button btnAgregarProductoAlDetalle;
-
-    // Componentes del Formulario
     EditText txtNumeroFactura, txtCantidadForm;
     TextView txtFecha;
     Spinner spinnerClientes, spinnerProductosForm;
     ListView listViewDetalleFormulario;
-
-    // Datos
     ArrayList<Factura> listaFacturas = new ArrayList<>();
     FacturaAdapter facturaAdapter;
     ArrayList<Detalle> listaDetalleTemporal = new ArrayList<>();
     DetalleFormularioAdapter detalleFormularioAdapter;
     int facturaSeleccionadaIndex = -1;
-
-    // Base de Datos
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
 
@@ -91,7 +82,6 @@ public class FacturaActivity extends AppCompatActivity {
         btnGuardarFactura = findViewById(R.id.btnGuardarFactura);
         btnCancelar = findViewById(R.id.btnCancelar);
 
-        // --- Configuración ---
         facturaAdapter = new FacturaAdapter();
         listViewFacturas.setAdapter(facturaAdapter);
         detalleFormularioAdapter = new DetalleFormularioAdapter();
@@ -172,7 +162,7 @@ public class FacturaActivity extends AppCompatActivity {
         cargarClientesSpinner();
         cargarProductosSpinner();
 
-        if (factura == null) { // Nueva
+        if (factura == null) {
             lblTituloFormulario.setText("Nueva Factura");
             btnAgregarProductoAlDetalle.setText("Añadir Producto a la Factura");
             txtFecha.setText("");
