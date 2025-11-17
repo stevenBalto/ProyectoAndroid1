@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout menuContainer = findViewById(R.id.menuContainer);
 
-        // Crear y añadir los botones del menú
+
         addMenuItem(menuContainer, R.drawable.rating_5957121, getString(R.string.menu_clientes), v -> startActivity(new Intent(MainActivity.this, ClientesActivity.class)));
         addMenuItem(menuContainer, R.drawable.shopping_1301306, getString(R.string.menu_productos), v -> startActivity(new Intent(MainActivity.this, ProductosActivity.class)));
         addMenuItem(menuContainer, R.drawable.invoice_12560218, getString(R.string.menu_facturacion), v -> startActivity(new Intent(MainActivity.this, FacturaActivity.class)));
@@ -42,21 +42,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addMenuItem(LinearLayout container, int iconRes, String title, View.OnClickListener listener) {
-        // Inflar el layout del ítem del menú
+
         LayoutInflater inflater = LayoutInflater.from(this);
         View menuItemView = inflater.inflate(R.layout.menu_item, container, false);
 
-        // Referenciar y configurar los elementos
+
         ImageView icon = menuItemView.findViewById(R.id.imageViewIcon);
         TextView text = menuItemView.findViewById(R.id.textViewTitle);
 
         icon.setImageResource(iconRes);
         text.setText(title);
 
-        // Asignar el listener para el clic
+
         menuItemView.setOnClickListener(listener);
 
-        // Añadir la vista al contenedor
+
         container.addView(menuItemView);
     }
 }

@@ -16,25 +16,25 @@ import android.database.sqlite.SQLiteOpenHelper;
         @Override
         public void onCreate(SQLiteDatabase db) {
 
-            // ========== TABLA CATEGORIAS ==========
+
             db.execSQL("CREATE TABLE categorias (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "nombre TEXT NOT NULL)");
 
-            // ========== TABLA CLIENTE ==========
+
             db.execSQL("CREATE TABLE cliente (" +
                     "cedula TEXT PRIMARY KEY," +
                     "nombre TEXT NOT NULL," +
                     "telefono TEXT)");
 
-            // ========== TABLA PRODUCTOS ==========
+
             db.execSQL("CREATE TABLE productos (" +
                     "codigo TEXT PRIMARY KEY," +
                     "nombre TEXT NOT NULL," +
                     "precio REAL NOT NULL)");
 
 
-            // ========== TABLA ENCABEZADO FACTURA ==========
+
             db.execSQL("CREATE TABLE encabezado_factura (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "cedula_cliente TEXT," +
@@ -42,7 +42,7 @@ import android.database.sqlite.SQLiteOpenHelper;
                     "total REAL NOT NULL DEFAULT 0.00," +
                     "FOREIGN KEY(cedula_cliente) REFERENCES cliente(cedula))");
 
-            // ========== TABLA DETALLE FACTURA ==========
+
             db.execSQL("CREATE TABLE detalle_factura (" +
                     "id_detalle INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "id_factura INTEGER," +
@@ -53,13 +53,13 @@ import android.database.sqlite.SQLiteOpenHelper;
                     "FOREIGN KEY(id_factura) REFERENCES encabezado_factura(id)," +
                     "FOREIGN KEY(codigo_producto) REFERENCES productos(codigo))");
 
-            // ========== TABLA USUARIOS ==========
+
             db.execSQL("CREATE TABLE usuarios (" +
                     "cedula TEXT PRIMARY KEY," +
                     "nombre TEXT NOT NULL," +
                     "llave TEXT NOT NULL)");
 
-            // ========== INSERTS ==========
+
             db.execSQL("INSERT INTO categorias (id, nombre) VALUES (10, 'Frutas'), (11, 'Helados'), (12, 'Verduras'), (13, 'Picantes')");
             db.execSQL("INSERT INTO cliente (cedula, nombre, telefono) VALUES " +
                     "('123', 'Pablo Osorno', '12345123')," +

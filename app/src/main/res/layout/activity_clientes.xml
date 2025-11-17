@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- SECCION 1: LISTA DE CLIENTES -->
+
     <LinearLayout
         android:id="@+id/layoutLista"
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:dividerHeight="8dp"/>
     </LinearLayout>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -94,7 +94,7 @@
             android:background="?attr/selectableItemBackground"/>
     </LinearLayout>
 
-    <!-- SECCION 2: FORMULARIO -->
+
     <ScrollView
         android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
