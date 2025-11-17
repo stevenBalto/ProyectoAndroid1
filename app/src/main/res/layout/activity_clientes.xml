@@ -94,10 +94,7 @@
             android:background="?attr/selectableItemBackground"/>
     </LinearLayout>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
     <ScrollView
         android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
