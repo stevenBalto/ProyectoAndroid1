@@ -115,7 +115,7 @@ public class ClientesActivity extends AppCompatActivity {
                 if (layoutFormulario.getVisibility() == View.VISIBLE) {
                     mostrarLista();
                 } else {
-                    finish(); // Finish the activity
+                    finish();
                 }
             }
         });

@@ -63,7 +63,7 @@ public class ProductosActivity extends AppCompatActivity {
         btnGuardar  = findViewById(R.id.btnGuardar);
         btnCancelar = findViewById(R.id.btnCancelar);
 
-        // --- BUSCADOR ---
+       
         txtBuscar.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -72,7 +72,6 @@ public class ProductosActivity extends AppCompatActivity {
             @Override public void afterTextChanged(Editable s) {}
         });
 
-        // --- SELECCIÓN EN LISTA ---
         listViewProductos.setOnItemClickListener((parent, view, position, id) -> {
             if (vistaSeleccionada != null) {
                 vistaSeleccionada.setBackgroundColor(Color.TRANSPARENT);
@@ -85,13 +84,10 @@ public class ProductosActivity extends AppCompatActivity {
             actualizarEstadoBotones(true);
         });
 
-        // Cargar listado inicial
         cargarProductos("");
 
-        // --- BOTÓN AGREGAR ---
         btnAgregar.setOnClickListener(v -> mostrarFormulario(null));
 
-        // --- BOTÓN EDITAR ---
         btnEditar.setOnClickListener(v -> {
             if (codigoSeleccionado != null) {
                 Producto p = buscarPorCodigo(codigoSeleccionado);
@@ -99,7 +95,6 @@ public class ProductosActivity extends AppCompatActivity {
             }
         });
 
-        // --- BOTÓN ELIMINAR ---
         btnEliminar.setOnClickListener(v -> {
             if (codigoSeleccionado != null) {
                 SQLiteDatabase writable = db.getWritableDatabase();
@@ -109,7 +104,6 @@ public class ProductosActivity extends AppCompatActivity {
             }
         });
 
-        // --- BOTÓN SALIR ---
         btnSalir.setOnClickListener(v -> {
             if (layoutFormulario.getVisibility() == View.VISIBLE) {
                 mostrarLista();
@@ -120,15 +114,14 @@ public class ProductosActivity extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(v -> guardarProducto());
         btnCancelar.setOnClickListener(v -> mostrarLista());
-        
-        // Handle back press using the new OnBackPressedDispatcher
+
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 if (layoutFormulario.getVisibility() == View.VISIBLE) {
                     mostrarLista();
                 } else {
-                    finish(); // Finish the activity
+                    finish();
                 }
             }
         });
@@ -149,13 +142,12 @@ public class ProductosActivity extends AppCompatActivity {
             txtCodigo.setText("");
             txtNombre.setText("");
             txtPrecio.setText("");
-            txtCodigo.setEnabled(true);   // alta (INSERT)
+            txtCodigo.setEnabled(true);
         } else {
             txtCodigo.setText(p.getCodigo());
             txtNombre.setText(p.getNombre());
-            // --- AJUSTE: Mostrar precio como entero ---
             txtPrecio.setText(String.valueOf((int) p.getPrecio()));
-            txtCodigo.setEnabled(false);  // edición (UPDATE)
+            txtCodigo.setEnabled(false);
         }
     }
 
@@ -174,7 +166,7 @@ public class ProductosActivity extends AppCompatActivity {
         double precio = Double.parseDouble(precioStr);
 
         SQLiteDatabase writable = db.getWritableDatabase();
-        boolean esUpdate = !txtCodigo.isEnabled(); // true = editar, false = insertar
+        boolean esUpdate = !txtCodigo.isEnabled();
 
         if (esUpdate) {
             writable.execSQL(
@@ -242,7 +234,6 @@ public class ProductosActivity extends AppCompatActivity {
         return null;
     }
 
-    // ----------------- MODELO -----------------
     public class Producto {
         private String codigo, nombre;
         private double precio;
@@ -258,7 +249,6 @@ public class ProductosActivity extends AppCompatActivity {
         public double getPrecio() { return precio; }
     }
 
-    // ------------- ADAPTADOR LISTVIEW -------------
     public class ProductoAdapter extends ArrayAdapter<Producto> {
 
         public ProductoAdapter(Context context, List<Producto> productos) {
@@ -279,7 +269,6 @@ public class ProductosActivity extends AppCompatActivity {
             TextView txt2 = convertView.findViewById(android.R.id.text2);
 
             txt1.setText(p.getNombre());
-            // --- AJUSTE: Mostrar Código y Precio (como entero) ---
             txt2.setText("Código: " + p.getCodigo() + "  |  Precio: ₡" + (int)p.getPrecio());
 
             if (vistaSeleccionada != null &&
