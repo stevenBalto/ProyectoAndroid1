@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     <LinearLayout
         android:id="@+id/layoutLista"
         android:layout_width="match_parent"
@@ -31,7 +34,10 @@
 
     </LinearLayout>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     <ScrollView
         android:id="@+id/layoutFormulario"
         android:layout_width="match_parent"
@@ -55,8 +61,12 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
 
+<<<<<<< HEAD
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/factura_number_label"/>
+=======
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Número de Factura:"/>
+>>>>>>> origin/master
             <EditText
                 android:id="@+id/txtNumeroFactura"
                 android:enabled="false"
@@ -83,7 +93,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"/>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +126,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Lista de Detalles de la factura actual -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,6 +140,10 @@
 
         </LinearLayout>
     </ScrollView>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/master
 
     <LinearLayout
         android:id="@+id/bottom_navigation_factura_form"

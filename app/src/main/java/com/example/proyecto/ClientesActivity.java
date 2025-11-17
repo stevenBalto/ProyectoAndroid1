@@ -115,7 +115,7 @@ public class ClientesActivity extends AppCompatActivity {
                 if (layoutFormulario.getVisibility() == View.VISIBLE) {
                     mostrarLista();
                 } else {
-                    finish(); // Finish the activity
+                    finish();
                 }
             }
         });
@@ -210,7 +210,6 @@ public class ClientesActivity extends AppCompatActivity {
         return null;
     }
 
-    // --- ADAPTADOR PERSONALIZADO ---
     public class ClienteAdapter extends ArrayAdapter<Cliente> {
         public ClienteAdapter(Context context, ArrayList<Cliente> clientes) {
             super(context, 0, clientes);

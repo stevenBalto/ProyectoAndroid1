@@ -30,32 +30,23 @@ import java.util.Locale;
 
 public class FacturaActivity extends AppCompatActivity {
 
-    // Vistas
     LinearLayout layoutLista, bottomNavLista;
     ScrollView layoutFormulario;
     LinearLayout bottomNavForm;
     ListView listViewFacturas;
     TextView lblTituloFormulario;
-
-    // Botones
     TextView btnAgregar, btnEditar, btnEliminar, btnSalir;
     Button btnGuardarFactura, btnCancelar;
     Button btnAgregarProductoAlDetalle;
-
-    // Componentes del Formulario
     EditText txtNumeroFactura, txtCantidadForm;
     TextView txtFecha;
     Spinner spinnerClientes, spinnerProductosForm;
     ListView listViewDetalleFormulario;
-
-    // Datos
     ArrayList<Factura> listaFacturas = new ArrayList<>();
     FacturaAdapter facturaAdapter;
     ArrayList<Detalle> listaDetalleTemporal = new ArrayList<>();
     DetalleFormularioAdapter detalleFormularioAdapter;
     int facturaSeleccionadaIndex = -1;
-
-    // Base de Datos
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
 
@@ -67,7 +58,7 @@ public class FacturaActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        // --- Enlaces a Vistas ---
+
         layoutLista = findViewById(R.id.layoutLista);
         layoutFormulario = findViewById(R.id.layoutFormulario);
         listViewFacturas = findViewById(R.id.listViewFacturas);
@@ -91,7 +82,6 @@ public class FacturaActivity extends AppCompatActivity {
         btnGuardarFactura = findViewById(R.id.btnGuardarFactura);
         btnCancelar = findViewById(R.id.btnCancelar);
 
-        // --- Configuración ---
         facturaAdapter = new FacturaAdapter();
         listViewFacturas.setAdapter(facturaAdapter);
         detalleFormularioAdapter = new DetalleFormularioAdapter();
@@ -116,13 +106,13 @@ public class FacturaActivity extends AppCompatActivity {
             facturaAdapter.notifyDataSetChanged();
         });
 
-        // Formulario
+
         txtFecha.setOnClickListener(v -> seleccionarFecha());
         btnAgregarProductoAlDetalle.setOnClickListener(v -> agregarProductoAlDetalle());
         btnGuardarFactura.setOnClickListener(v -> guardarFactura());
         btnCancelar.setOnClickListener(v -> mostrarLista());
         
-        // Listener para EDITAR/QUITAR productos del detalle en el modo edición
+
         listViewDetalleFormulario.setOnItemLongClickListener((parent, view, position, id) -> {
             final CharSequence[] options = {"Editar Cantidad", "Quitar Producto"};
             new AlertDialog.Builder(FacturaActivity.this)
@@ -151,7 +141,7 @@ public class FacturaActivity extends AppCompatActivity {
         });
     }
 
-    // ================== VISTAS ==================
+
     private void mostrarLista() {
         layoutFormulario.setVisibility(View.GONE);
         bottomNavForm.setVisibility(View.GONE);
@@ -172,7 +162,7 @@ public class FacturaActivity extends AppCompatActivity {
         cargarClientesSpinner();
         cargarProductosSpinner();
 
-        if (factura == null) { // Nueva
+        if (factura == null) {
             lblTituloFormulario.setText("Nueva Factura");
             btnAgregarProductoAlDetalle.setText("Añadir Producto a la Factura");
             txtFecha.setText("");
@@ -194,7 +184,7 @@ public class FacturaActivity extends AppCompatActivity {
         detalleFormularioAdapter.notifyDataSetChanged();
     }
 
-    // ================== LÓGICA ==================
+
     private void guardarFactura() {
         if (spinnerClientes.getSelectedItemPosition() == 0 || txtFecha.getText().toString().isEmpty() || listaDetalleTemporal.isEmpty()) {
             Toast.makeText(this, "Complete los datos y agregue productos.", Toast.LENGTH_SHORT).show();
@@ -213,7 +203,7 @@ public class FacturaActivity extends AppCompatActivity {
             header.put("total", total);
             
             int idFactura;
-            if (facturaSeleccionadaIndex == -1) { // Guardar nueva
+            if (facturaSeleccionadaIndex == -1) {
                 idFactura = (int) db.insertOrThrow("encabezado_factura", null, header);
             } else { // Actualizar
                 idFactura = listaFacturas.get(facturaSeleccionadaIndex).id;
@@ -257,9 +247,9 @@ public class FacturaActivity extends AppCompatActivity {
                 boolean existe = false;
                 for(Detalle d : listaDetalleTemporal) {
                     if(d.codigo.equals(codigo)) {
-                        if (facturaSeleccionadaIndex != -1) { // Modo Editar: Reemplazar cantidad
+                        if (facturaSeleccionadaIndex != -1) {
                             d.cantidad = cantidad;
-                        } else { // Modo Nuevo: Sumar cantidad
+                        } else {
                             d.cantidad += cantidad;
                         }
                         d.subtotal = d.cantidad * d.precio;
@@ -325,7 +315,7 @@ public class FacturaActivity extends AppCompatActivity {
         builder.show();
     }
 
-    // ================== HELPERS ==================
+
     private void cargarFacturasDeDB() {
         listaFacturas.clear();
         String query = "SELECT e.id, e.fecha, e.total, c.nombre, " +
@@ -390,7 +380,7 @@ public class FacturaActivity extends AppCompatActivity {
         btnEliminar.setAlpha(seleccionado ? 1f : 0.5f);
     }
     
-    // ================== CLASES INTERNAS ==================
+
     public static class Factura {
         int id, total; String fecha, cliente, productos;
         public Factura(int id, String f, String c, int t, String p) { this.id=id; this.fecha=f; this.cliente=c; this.total=t; this.productos=p; }
